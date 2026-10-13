@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 240" fill="none">
+  <!-- Placeholder cream tube (no branding): swap for client-supplied PNG -->
+  <defs>
+    <linearGradient id="tb" x1="0" x2="1">
+      <stop offset="0" stop-color="#e6e1d4"/>
+      <stop offset=".28" stop-color="#fbfaf6"/>
+      <stop offset=".7" stop-color="#f1ede3"/>
+      <stop offset="1" stop-color="#d9d3c4"/>
+    </linearGradient>
+    <linearGradient id="tc" x1="0" x2="1">
+      <stop offset="0" stop-color="#0b3836"/>
+      <stop offset=".35" stop-color="#1a6a66"/>
+      <stop offset="1" stop-color="#0b3836"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="60" cy="234" rx="34" ry="5" fill="#1c2426" opacity=".14"/>
+  <path d="M18 14h84l-6 152c-.5 10-8 16-18 16H42c-10 0-17.5-6-18-16z" fill="url(#tb)"/>
+  <rect x="16" y="8" width="88" height="10" rx="2" fill="#e2dccd"/>
+  <path d="M16 12h88" stroke="#cfc8b6" stroke-width="1"/>
+  <rect x="38" y="182" width="44" height="50" rx="8" fill="url(#tc)"/>
+  <rect x="38" y="182" width="44" height="6" fill="#082a29" opacity=".35"/>
+  <rect x="30" y="70" width="60" height="1.2" fill="#c8a45a"/>
+  <rect x="40" y="86" width="40" height="5" rx="2.5" fill="#0F4C4A" opacity=".85"/>
+  <rect x="46" y="97" width="28" height="3" rx="1.5" fill="#0F4C4A" opacity=".35"/>
+  <rect x="31" y="140" width="58" height="8" fill="#0F4C4A"/>
+  <rect x="31" y="138" width="58" height="1.2" fill="#c8a45a"/>
+  <path d="M28 20l4 140" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+</svg>
