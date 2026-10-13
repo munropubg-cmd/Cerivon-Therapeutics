@@ -964,21 +964,16 @@ button.link-arrow { font: inherit; font-size: var(--fs-body-sm); font-weight: 50
 /* mobile: the phone now renders unscaled-crisp at --s .56, so the card needs less room above it */
 @media (max-width: 640px) { .photo-sec .hiw { padding-bottom: 400px; } }
 
-/* Hero cards: the NAD+ render frames its vial ~8% larger than the other two, so the
-   semaglutide and tadalafil renders zoom in more to match. Every render is then nudged
-   right and down (translate stays within the zoom overflow, so no edge ever shows),
-   which gives the title/subtitle breathing room above the vial. The NAD+ render itself was
-   extended 7.5% at the top (original in tools/originals/) so its vial sits as low as the others. */
-.cat { --s: 1.25; --tx: 5.5%; --ty: 8%; }
-.cat.cat--weight-management { --s: 1.29; --ty: 9.5%; }
-.cat.cat--peptides { --s: 1.17; --tx: 5.5%; --ty: 8.5%; }
-.cat.cat--sexual-health { --ty: 11%; }
+/* Hero cards: each render was lowered in the file itself (soft top extension, see
+   tools/lower-hero-renders.cjs) so the product sits clear of the title. The NAD+ render frames
+   its vial ~8% larger, so semaglutide and tadalafil keep a gentle 1.12 zoom to match it, and
+   all three get a small nudge right (kept within the zoom overflow, so no edge ever shows). */
+.cat { --s: 1.12; --tx: 3%; --ty: 0%; }
+.cat.cat--peptides { --s: 1.04; --tx: 1.5%; }
 .cat__media img { transform-origin: 50% 50%; }
 .js .cats[data-stagger].is-in .cat .cat__media img { transform: translate(var(--tx), var(--ty)) scale(var(--s)); }
-.js .cats[data-stagger].is-in .cat:hover .cat__media img { transform: translate(var(--tx), var(--ty)) scale(calc(var(--s) * 1.05)); }
+.js .cats[data-stagger].is-in .cat:hover .cat__media img { transform: translate(var(--tx), var(--ty)) scale(calc(var(--s) * 1.04)); }
 @media (max-width: 640px) {
-  .cat { --s: 1.12; --tx: 3%; --ty: 5.5%; }
-  .cat.cat--weight-management { --s: 1.15; --ty: 7%; }
-  .cat.cat--peptides { --s: 1.05; --tx: 2.5%; --ty: 2.5%; }
-  .cat.cat--sexual-health { --ty: 6%; }
+  .cat { --s: 1.07; --tx: 0%; }
+  .cat.cat--peptides { --s: 1; --tx: 0%; }
 }
