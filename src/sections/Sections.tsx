@@ -203,7 +203,7 @@ export function SexualHealthSection() {
               <h3 className="h-card"><span className="line"><span>Private by <em>design</em></span></span></h3>
               <p>From a private online visit to a plain, unmarked parcel at your door, every step keeps your care between you and your provider.</p>
             </div>
-            <Link to={areaIntake('sexual-health')} className="btn btn--light xcard__btn">Start a private visit</Link>
+            <SmartLink to={areaIntake('sexual-health')} className="btn btn--light xcard__btn">Start a private visit</SmartLink>
             <DiscreetRow />
           </R>
         </div>
