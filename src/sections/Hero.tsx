@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { GoalsBtn } from '../components/Bits';
+import { GoalsBtn, SmartLink } from '../components/Bits';
 import { ArrowRight, ArrowUpRight, Chat, Shield, Truck } from '../components/Icons';
-import { categoryPath, type CategorySlug } from '../data/treatments';
+import { areaIntake } from '../data/intake';
+import type { CategorySlug } from '../data/treatments';
 import { R, Split } from '../hooks/useReveal';
 
 /* Same light hero as the reference template: headline left, CTA right, three photo cards, then the goal cards. */
@@ -11,11 +12,11 @@ const CATS: { slug: CategorySlug; title: string; desc: string; img: string; alt:
   { slug: 'sexual-health', title: 'Sexual Health', desc: 'Private, provider-led care', img: '/assets/img/hero/sexual-tadalafil.webp', alt: 'Tadalafil bottle on dark granite' },
 ];
 
-const MINIS: { to: string; title: string; img: string; tone: string }[] = [
-  { to: '/hair-loss', title: 'Hair Loss', img: '/assets/img/products/minoxidil.webp', tone: 'mint' },
-  { to: '/skincare', title: 'Skincare', img: '/assets/img/products/tretinoin-gel.webp', tone: 'sand' },
-  { to: '/hrt', title: 'Hormone Therapy', img: '/assets/img/products/estradiol.webp', tone: 'blush' },
-  { to: '/sexual-health', title: 'Erectile Dysfunction', img: '/assets/img/products/tadalafil.webp', tone: 'sage' },
+const MINIS: { slug: CategorySlug; title: string; img: string; tone: string }[] = [
+  { slug: 'hair-loss', title: 'Hair Loss', img: '/assets/img/products/minoxidil.webp', tone: 'mint' },
+  { slug: 'skincare', title: 'Skincare', img: '/assets/img/products/tretinoin-gel.webp', tone: 'sand' },
+  { slug: 'hrt', title: 'Hormone Therapy', img: '/assets/img/products/estradiol.webp', tone: 'blush' },
+  { slug: 'sexual-health', title: 'Erectile Dysfunction', img: '/assets/img/products/tadalafil.webp', tone: 'sage' },
 ];
 
 export function Hero() {
@@ -47,7 +48,7 @@ export function Hero() {
 
         <R className="cats" kind="stagger">
           {CATS.map((c, i) => (
-            <Link key={c.slug} to={categoryPath(c.slug)} className={`cat cat--${c.slug}`} style={{ ['--i' as string]: i }}>
+            <SmartLink key={c.slug} to={areaIntake(c.slug)} className={`cat cat--${c.slug}`} style={{ ['--i' as string]: i }}>
               <div className="cat__media"><img src={c.img} alt={c.alt} /></div>
               <div className="cat__body">
                 <div className="cat__text">
@@ -56,7 +57,7 @@ export function Hero() {
                 </div>
                 <span className="arrow-btn" aria-hidden="true"><ArrowUpRight /></span>
               </div>
-            </Link>
+            </SmartLink>
           ))}
         </R>
 
@@ -67,10 +68,10 @@ export function Hero() {
           </R>
           <R className="minis" kind="stagger">
             {MINIS.map((m, i) => (
-              <Link key={m.title} to={m.to} className={`mini mini--${m.tone}`} style={{ ['--i' as string]: i }}>
+              <SmartLink key={m.title} to={areaIntake(m.slug)} className={`mini mini--${m.tone}`} style={{ ['--i' as string]: i }}>
                 <h3 className="mini__title">{m.title}</h3>
                 <img className="mini__vial" src={m.img} alt="" />
-              </Link>
+              </SmartLink>
             ))}
           </R>
         </div>

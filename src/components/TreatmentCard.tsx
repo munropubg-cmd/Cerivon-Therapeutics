@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom';
-import { treatmentPath, type Treatment } from '../data/treatments';
+import { productIntake } from '../data/intake';
+import { SmartLink } from './Bits';
+import type { Treatment } from '../data/treatments';
 import { ArrowRight } from './Icons';
 
-/** Card used in every treatment lineup. Opens the treatment's own page (which holds "Start treatment"). */
+/** Card used in every treatment lineup. Opens that treatment's intake form. */
 export function TreatmentCard({ t, i, variant = 'tx' }: { t: Treatment; i: number; variant?: 'tx' | 'sk' }) {
   const v = variant;
   return (
-    <Link to={treatmentPath(t)} className={v} style={{ ['--i' as string]: i }}>
+    <SmartLink to={productIntake(t.slug)} className={v} style={{ ['--i' as string]: i }}>
       <span className={`${v}__tag`}>{t.tag}</span>
       <div className={`${v}__media`}>
         <img src={t.image} alt={`${t.name} product image`} loading="lazy" />
@@ -25,6 +26,6 @@ export function TreatmentCard({ t, i, variant = 'tx' }: { t: Treatment; i: numbe
       <span className={`${v}__link`}>
         View treatment <ArrowRight />
       </span>
-    </Link>
+    </SmartLink>
   );
 }

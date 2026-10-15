@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { CATEGORIES, categoryPath } from '../data/treatments';
+import { areaIntake } from '../data/intake';
+import { CATEGORIES } from '../data/treatments';
+import { SmartLink } from './Bits';
 import { ArrowRight, Close } from './Icons';
 import { LineMark } from './LineMark';
 import { Logo } from './Logo';
@@ -85,11 +86,11 @@ export function GoalsDialog() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.28 + i * 0.06, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <Link className="goal" to={categoryPath(c.slug)} onClick={closeGoals}>
+                  <SmartLink className="goal" to={areaIntake(c.slug)} onClick={closeGoals}>
                     <span className={`goal__thumb goal__thumb--${THUMB[c.slug].cls}`}><img src={THUMB[c.slug].img} alt="" loading="lazy" /></span>
                     <span className="goal__text"><b>{c.name === 'HRT' ? 'Hormone Therapy (HRT)' : c.name}</b><small>{c.blurb}</small></span>
                     <span className="goal__arrow" aria-hidden="true"><ArrowRight /></span>
-                  </Link>
+                  </SmartLink>
                 </motion.li>
               ))}
             </ul>

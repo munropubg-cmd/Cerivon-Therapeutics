@@ -2,7 +2,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ANNOUNCEMENTS } from '../data/site';
-import { CATEGORIES, categoryPath, treatmentPath, treatmentsIn } from '../data/treatments';
+import { areaIntake, productIntake } from '../data/intake';
+import { CATEGORIES, treatmentsIn } from '../data/treatments';
+import { SmartLink } from './Bits';
 import { ArrowLeft, ArrowRight, BtnIcon, ChevronDown, Help, Sparkle } from './Icons';
 import { Logo } from './Logo';
 import { useUi } from './UiContext';
@@ -144,15 +146,15 @@ export function Header() {
             </div>
           </div>
 
-          {/* Mega menu: Treatments (category → treatment pages) */}
+          {/* Mega menu: Treatments (category and treatment → intake forms) */}
           <div className={`mega${menu === 'treatments' ? ' is-open' : ''}`} id="mega-treatments" role="region" aria-label="Treatments" {...hover}>
             <div className="mega__inner container">
               <div className="mega__cols">
                 {CATEGORIES.map((c) => (
                   <div className="mega__col" key={c.slug}>
-                    <Link className="mega__title" to={categoryPath(c.slug)}>{c.name}</Link>
+                    <SmartLink className="mega__title" to={areaIntake(c.slug)}>{c.name}</SmartLink>
                     {treatmentsIn(c.slug).map((t) => (
-                      <Link key={t.slug} to={treatmentPath(t)}>{t.name}</Link>
+                      <SmartLink key={t.slug} to={productIntake(t.slug)}>{t.name}</SmartLink>
                     ))}
                   </div>
                 ))}
@@ -198,7 +200,7 @@ export function Header() {
           </button>
           <ul className="m-nav">
             {CATEGORIES.map((c) => (
-              <li key={c.slug}><Link to={categoryPath(c.slug)}>{c.name === 'HRT' ? 'Hormone Therapy (HRT)' : c.name}</Link></li>
+              <li key={c.slug}><SmartLink to={areaIntake(c.slug)}>{c.name === 'HRT' ? 'Hormone Therapy (HRT)' : c.name}</SmartLink></li>
             ))}
           </ul>
           <ul className="m-nav m-nav--small">

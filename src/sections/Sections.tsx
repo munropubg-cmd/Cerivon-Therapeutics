@@ -169,7 +169,7 @@ export function PeptidesSection() {
               <h3 className="h-card h-card--dark"><span className="line"><span>Your body, <em>explained</em></span></span></h3>
               <p>Tap a point to read about each compound. A licensed provider decides whether any program is appropriate for you.</p>
             </div>
-            <Link to="/peptides" className="btn btn--dark xcard__btn">Explore peptides</Link>
+            <SmartLink to={areaIntake('peptides')} className="btn btn--dark xcard__btn">Start your peptide intake</SmartLink>
             <BodyMap />
             <p className="xcard__caption">Educational information only. Not a treatment claim.</p>
           </R>

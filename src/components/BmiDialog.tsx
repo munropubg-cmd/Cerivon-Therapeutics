@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { areaIntake } from '../data/intake';
+import { SmartLink } from './Bits';
 import { BtnIcon, Close } from './Icons';
 import { useUi } from './UiContext';
 
@@ -117,7 +118,7 @@ export function BmiDialog() {
           CDC adult BMI ranges.
         </p>
         <div className="bmi__actions">
-          <Link to="/weight-management" className="btn btn--primary" onClick={close}>Explore weight management <BtnIcon /></Link>
+          <SmartLink to={areaIntake('weight-management')} className="btn btn--primary" onClick={close}>Start your weight management intake <BtnIcon /></SmartLink>
         </div>
       </form>
     </dialog>

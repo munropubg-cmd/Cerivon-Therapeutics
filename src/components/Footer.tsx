@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { BRAND, COMPOUNDED_DISCLOSURE, CONTACT, EMERGENCY, ROLE_DISCLOSURE } from '../data/site';
-import { CATEGORIES, categoryPath } from '../data/treatments';
-import { GoalsBtn, StateCoverage } from './Bits';
+import { CATEGORIES } from '../data/treatments';
+import { areaIntake } from '../data/intake';
+import { GoalsBtn, SmartLink, StateCoverage } from './Bits';
 import { LineMark } from './LineMark';
 import { Logo } from './Logo';
 
@@ -23,7 +24,7 @@ export function Footer() {
           <nav className="footer__cols" aria-label="Footer">
             <div className="footer__col">
               <p className="footer__head">Treatments</p>
-              {CATEGORIES.map((c) => <Link key={c.slug} to={categoryPath(c.slug)}>{c.name === 'HRT' ? 'Hormone Therapy (HRT)' : c.name}</Link>)}
+              {CATEGORIES.map((c) => <SmartLink key={c.slug} to={areaIntake(c.slug)}>{c.name === 'HRT' ? 'Hormone Therapy (HRT)' : c.name}</SmartLink>)}
             </div>
             <div className="footer__col">
               <p className="footer__head">Company</p>
