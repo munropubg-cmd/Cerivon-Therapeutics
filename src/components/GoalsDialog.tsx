@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { areaIntake } from '../data/intake';
+import { PHOTOS, pic, picSet } from '../data/photos';
 import { CATEGORIES } from '../data/treatments';
 import { SmartLink } from './Bits';
 import { ArrowRight, Close } from './Icons';
@@ -8,13 +9,14 @@ import { LineMark } from './LineMark';
 import { Logo } from './Logo';
 import { useUi } from './UiContext';
 
-const THUMB: Record<string, { cls: string; img: string }> = {
-  'weight-management': { cls: 'teal', img: '/assets/img/weight-woman.webp' },
-  skincare: { cls: 'sand', img: '/assets/img/skincare-woman.webp' },
-  'hair-loss': { cls: 'sky', img: '/assets/img/hairloss-man.webp' },
-  peptides: { cls: 'photo', img: '/assets/img/card-peptides.webp' },
-  'sexual-health': { cls: 'photo', img: '/assets/img/sexual-couple.webp' },
-  hrt: { cls: 'photo', img: '/assets/img/sections/hrt-model.webp' },
+/* Same people as the home page treatment areas (real adults, mostly 40 to 60+) */
+const THUMB: Record<string, { id: string | number; pos: string }> = {
+  'weight-management': { id: PHOTOS.weight, pos: '62% 30%' },
+  skincare: { id: PHOTOS.skincare, pos: '50% 35%' },
+  'hair-loss': { id: PHOTOS.hair, pos: '50% 25%' },
+  peptides: { id: PHOTOS.peptides, pos: '55% 30%' },
+  'sexual-health': { id: PHOTOS.sexual, pos: '50% 40%' },
+  hrt: { id: PHOTOS.hrt, pos: '38% 30%' },
 };
 
 /** Full-screen treatment chooser, opened by every general "Start your visit" button. */
@@ -87,7 +89,7 @@ export function GoalsDialog() {
                   transition={{ delay: 0.28 + i * 0.06, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <SmartLink className="goal" to={areaIntake(c.slug)} onClick={closeGoals}>
-                    <span className={`goal__thumb goal__thumb--${THUMB[c.slug].cls}`}><img src={THUMB[c.slug].img} alt="" loading="lazy" /></span>
+                    <span className="goal__thumb"><img src={pic(THUMB[c.slug].id, 200, 200)} srcSet={picSet(THUMB[c.slug].id, 200, 200)} style={{ objectPosition: THUMB[c.slug].pos }} alt="" loading="lazy" /></span>
                     <span className="goal__text"><b>{c.name === 'HRT' ? 'Hormone Therapy (HRT)' : c.name}</b><small>{c.blurb}</small></span>
                     <span className="goal__arrow" aria-hidden="true"><ArrowRight /></span>
                   </SmartLink>

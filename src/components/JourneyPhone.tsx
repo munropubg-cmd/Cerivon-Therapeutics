@@ -14,6 +14,9 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const SPRING = { type: 'spring', stiffness: 420, damping: 26 } as const;
 const STEP_MS = 4600;
 const STEPS = ['Online intake', 'Provider review', 'Your treatment plan', 'Ongoing care'];
+/** Home page version follows the client's four steps, in Cerivon navy / teal / cyan. */
+const STEPS_GENERAL = ['Complete your online intake', 'A licensed provider evaluates it', 'Prescription, if appropriate', 'Pharmacy fulfillment and follow-up'];
+export type JourneyVariant = 'skincare' | 'general';
 const DOC = 'https://images.unsplash.com/photo-1659353888906-adb3e0041693?w=220&h=220&fit=crop&crop=faces&q=70';
 
 const Icon = ({ d }: { d: ReactNode }) => (
@@ -36,13 +39,15 @@ function Typewriter({ text, delay, speed = 32 }: { text: string; delay: number; 
 }
 
 /* ---------- 1. Intake (dusty rose) ---------- */
-function Intake() {
-  const tiles = [
+function Intake({ general }: { general?: boolean }) {
+  const all = [
     { k: 'Skin', d: <><circle cx="12" cy="12" r="7.5" /><path d="M9 10h.01M15 10h.01M9 14.5c1.6 1.4 4.4 1.4 6 0" /></> },
     { k: 'Hair', d: <><path d="M6 20c0-7 2-12 6-12s6 5 6 12" /><path d="M9 9c0-3 1.3-5 3-5s3 2 3 5" /></> },
     { k: 'Weight', d: <><rect x="4" y="5" width="16" height="15" rx="4" /><path d="M9 10a3 3 0 016 0" /><path d="M12 10l1.5-1.5" /></> },
     { k: 'Hormones', d: <><circle cx="8" cy="8" r="3" /><circle cx="16" cy="16" r="3" /><path d="M10.5 10.5l3 3" /></> },
   ];
+  // the first tile is the one that gets tapped
+  const tiles = general ? [all[2], all[0], all[1], all[3]] : all;
   return (
     <div className="jx-body">
       <p className="jx-kick">Step 1 · Your intake</p>
@@ -71,7 +76,7 @@ function Intake() {
       </div>
       <motion.div className="jx-sheet" initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.7, duration: 0.6, ease: EASE }}>
         <small>Anything else we should know?</small>
-        <p><Typewriter text="Sensitive skin, new to retinoids" delay={2.1} /></p>
+        <p><Typewriter text={general ? 'Looking for a plan I can keep up with' : 'Sensitive skin, new to retinoids'} delay={2.1} /></p>
       </motion.div>
       <motion.span className="jx-cta" animate={{ scale: [1, 1, 0.95, 1] }} transition={{ delay: 3.6, duration: 0.45, times: [0, 0.3, 0.6, 1] }}>
         Continue
@@ -193,38 +198,103 @@ function Ongoing() {
   );
 }
 
+/* ---------- 3 (general). Prescription, if appropriate ---------- */
+function Prescription() {
+  const rows = ['Reviewed by a licensed provider', 'Matched to your health history', 'Sent to a licensed pharmacy'];
+  return (
+    <div className="jx-body">
+      <p className="jx-kick">Step 3 · Your provider decides</p>
+      <p className="jx-h">Your treatment plan</p>
+      <motion.div className="jx-rx" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7, ease: EASE }}>
+        <motion.span className="jx-rx__ic" initial={{ scale: 0.6, rotate: -8 }} animate={{ scale: 1, rotate: 0 }} transition={{ ...SPRING, delay: 0.45 }}>
+          <Icon d={<><path d="M7 3h7l4 4v14H7z" /><path d="M14 3v4h4" /><path d="M10 11h2.5a1.8 1.8 0 010 3.6H10V11zm0 3.6V18m2.4-3.4L15 18" /></>} />
+        </motion.span>
+        <span className="jx-rx__meta"><b>Prescription</b><small>Only if it's right for you</small></span>
+      </motion.div>
+      <ul className="jx-rows jx-rows--tight">
+        {rows.map((r, i) => (
+          <motion.li key={r} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1 + i * 0.5, duration: 0.5, ease: EASE }}>
+            {r}
+            <motion.i initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ ...SPRING, delay: 1.3 + i * 0.5 }}><Icon d={CHECK} /></motion.i>
+          </motion.li>
+        ))}
+      </ul>
+      <motion.span className="jx-cta" animate={{ scale: [1, 1, 0.95, 1] }} transition={{ delay: 3.6, duration: 0.45, times: [0, 0.3, 0.6, 1] }}>
+        View my plan
+      </motion.span>
+    </div>
+  );
+}
+
+/* ---------- 4 (general). Pharmacy fulfillment and follow-up ---------- */
+function Fulfillment() {
+  const stages = ['Filled', 'Shipped', 'Delivered'];
+  return (
+    <div className="jx-body">
+      <p className="jx-kick">Step 4 · Pharmacy &amp; follow-up</p>
+      <p className="jx-h">On its way to you</p>
+      <motion.div className="jx-card" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6, ease: EASE }}>
+        <small>Licensed pharmacy</small>
+        <div className="jx-track jx-track--card">
+          <span className="jx-track__bar"><motion.b initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.6, duration: 1.8, ease: EASE }} /></span>
+          {stages.map((st, i) => (
+            <motion.span key={st} className="jx-track__stop" initial={{ opacity: 0.45 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 + i * 0.75 }}>
+              <motion.i initial={{ scale: 0.5, backgroundColor: 'rgba(255,255,255,0.3)' }} animate={{ scale: 1, backgroundColor: 'rgba(255,255,255,1)' }} transition={{ ...SPRING, delay: 0.7 + i * 0.75 }} />
+              {st}
+            </motion.span>
+          ))}
+        </div>
+      </motion.div>
+      <motion.div className="jx-msg" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.1, duration: 0.5, ease: EASE }}>
+        <img src={DOC} alt="" />
+        <p><Typewriter text="I'll check in with you soon. Message me anytime." delay={2.4} speed={24} /></p>
+      </motion.div>
+      <motion.span className="jx-next" initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ ...SPRING, delay: 3.7 }}>
+        <Icon d={<><rect x="4" y="5" width="16" height="15" rx="3" /><path d="M8 3v4M16 3v4M4 10h16" /></>} />
+        Follow-up scheduled
+      </motion.span>
+    </div>
+  );
+}
+
 const SCENES = [Intake, Review, Plan, Ongoing];
 const TONES = ['rose', 'plum', 'peach', 'lilac'];
+const SCENES_GENERAL = [() => <Intake general />, Review, Prescription, Fulfillment];
+const TONES_GENERAL = ['ocean', 'deep', 'teal2', 'navy2'];
 
 /** Same API the How-it-works card uses: a ref for the card, the active step, the step labels and the phone. */
-export function useJourneyPhone() {
+export function useJourneyPhone(variant: JourneyVariant = 'skincare') {
+  const general = variant === 'general';
+  const scenes = general ? SCENES_GENERAL : SCENES;
+  const tones = general ? TONES_GENERAL : TONES;
+  const steps = general ? STEPS_GENERAL : STEPS;
   const card = useRef<HTMLDivElement>(null);
   const visible = useInView(card, { amount: 0.3 });
   const reduce = useReducedMotion();
   // dev only: ?jx=2 pins the phone on one scene for review
   const pin = import.meta.env.DEV ? new URLSearchParams(window.location.search).get('jx') : null;
-  const [idx, setIdx] = useState(pin ? Number(pin) % SCENES.length : 0);
+  const [idx, setIdx] = useState(pin ? Number(pin) % scenes.length : 0);
 
   useEffect(() => {
     if (!visible || reduce || pin) return;
-    const id = window.setInterval(() => setIdx((i) => (i + 1) % SCENES.length), STEP_MS);
+    const id = window.setInterval(() => setIdx((i) => (i + 1) % scenes.length), STEP_MS);
     return () => window.clearInterval(id);
-  }, [visible, reduce, pin]);
+  }, [visible, reduce, pin, scenes.length]);
 
-  const Scene = SCENES[idx];
+  const Scene = scenes[idx];
 
   const phone = (
-    <div className="hand-phone" aria-hidden="true">
+    <div className={`hand-phone hand-phone--${variant}`} aria-hidden="true">
       <div className="phone__glow" />
       <div className="hp">
         <div className="phone__screen jx-screen">
           {/* colour layers crossfade underneath the content */}
-          {TONES.map((t, i) => (
+          {tones.map((t, i) => (
             <motion.div key={t} className={`jx-bg jx-bg--${t}`} animate={{ opacity: i === idx ? 1 : 0 }} transition={{ duration: 0.7, ease: 'easeInOut' }} />
           ))}
           <div className="jx-status"><b>9:41</b><span><i /><i /><i /></span></div>
           <div className="jx-steps">
-            {STEPS.map((s, i) => (
+            {steps.map((s, i) => (
               <span key={s} className={i === idx ? 'is-on' : i < idx ? 'is-done' : ''}>
                 {i === idx && <motion.b layoutId="jx-step" transition={SPRING} />}
               </span>
@@ -251,5 +321,5 @@ export function useJourneyPhone() {
     </div>
   );
 
-  return { card, idx, steps: STEPS, phone };
+  return { card, idx, setIdx, steps, phone };
 }

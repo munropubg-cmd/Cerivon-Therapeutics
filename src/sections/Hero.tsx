@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
 import { GoalsBtn, SmartLink } from '../components/Bits';
-import { ArrowRight, ArrowUpRight, Chat, Shield, Truck } from '../components/Icons';
+import { ArrowRight, ArrowUpRight } from '../components/Icons';
 import { areaIntake } from '../data/intake';
 import type { CategorySlug } from '../data/treatments';
 import { R, Split } from '../hooks/useReveal';
@@ -19,30 +18,25 @@ const MINIS: { slug: CategorySlug; title: string; img: string; tone: string }[] 
   { slug: 'sexual-health', title: 'Erectile Dysfunction', img: '/assets/img/products/tadalafil.webp', tone: 'sage' },
 ];
 
+/** Second section of the home page (it was the hero before the lifestyle hero arrived). */
 export function Hero() {
   return (
-    <section className="hero" id="top">
+    <section className="hero hero--goals" id="care" aria-label="Choose your care">
       <div className="container">
         <div className="hero__head">
           <div className="hero__copy">
-            <R as="p" className="eyebrow"><span className="pulse" />Private telehealth care</R>
-            <Split as="h1" className="h-display" lines={['Specialized care,', <>made <em>personal</em></>]} />
+            <R as="p" className="eyebrow"><span className="pulse" />Choose your care</R>
+            <Split as="h2" className="h-display" lines={['Specialized care,', <>made <em>personal</em></>]} />
             <R as="p" className="hero__lede" delay={0.35}>
-              Share your goals in a private online intake. A licensed provider reviews your history, builds a plan
-              when treatment is appropriate, and stays with you through ongoing care.
+              Start with the area you'd like help with. Every program begins with a private online intake and a
+              licensed provider's review of your health history.
             </R>
           </div>
 
           <R className="hero__cta" delay={0.5}>
             <div className="hero__btns">
               <GoalsBtn>Start your visit</GoalsBtn>
-              <Link to="/#how" className="btn btn--ghost">How it works</Link>
             </div>
-            <ul className="hero__trust">
-              <li><Shield />Licensed providers</li>
-              <li><Chat />Ongoing care</li>
-              <li><Truck />Discreet delivery</li>
-            </ul>
           </R>
         </div>
 

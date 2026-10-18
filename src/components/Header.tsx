@@ -104,7 +104,9 @@ export function Header() {
     onClick: () => (menu === m ? setMenu(null) : open(m)),
   });
 
-  const cls = ['site-top', state.scrolled && 'is-scrolled', state.hidden && 'is-hidden', state.collapsed && 'is-collapsed'].filter(Boolean).join(' ');
+  // Home page: the header floats transparent over the full-screen hero photo until you scroll or open a menu
+  const over = loc.pathname === '/' && !state.scrolled && !menu && !mobile;
+  const cls = ['site-top', state.scrolled && 'is-scrolled', state.hidden && 'is-hidden', state.collapsed && 'is-collapsed', over && 'is-over'].filter(Boolean).join(' ');
 
   return (
     <>
@@ -113,7 +115,7 @@ export function Header() {
         <Announce />
         <header className="header">
           <div className="header__inner container">
-            <Logo tone="dark" />
+            <Logo tone={over ? 'light' : 'dark'} />
 
             <nav className="nav" aria-label="Primary">
               <ul className="nav__list">
