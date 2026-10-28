@@ -100,8 +100,8 @@ export function LifeHero() {
             <GoalsBtn className="btn btn--primary lh__cta">Start your online visit</GoalsBtn>
           </motion.div>
           <motion.p {...appear(1.1)} className="lh__lede">
-            Personalized, prescription-based care through private online evaluations. A licensed provider reviews
-            your health history and, if treatment is right for you, a licensed pharmacy delivers it to your door.
+            Cerivon connects you with licensed providers for online medical evaluations. When it's appropriate,
+            your provider prescribes treatment, and a licensed pharmacy delivers it to your door.
           </motion.p>
         </div>
 
@@ -124,13 +124,13 @@ export function LifeHero() {
    3. Explore treatment areas: one consistent layout for every category,
       people first, a short introduction, then the dedicated page or the intake.
    ========================================================================== */
-const AREA: Record<CategorySlug, { photo: string | number; pos: string; label: string; accent: string; alt: string }> = {
-  'weight-management': { photo: PHOTOS.weight, pos: '62% 30%', label: 'Weight Management', accent: '#2BA9B4', alt: 'A woman in her forties running by the sea' },
-  skincare: { photo: PHOTOS.skincare, pos: '50% 30%', label: 'Skincare', accent: '#C2607E', alt: 'A woman in her forties smiling, touching the skin by her eye' },
-  'hair-loss': { photo: PHOTOS.hair, pos: '50% 25%', label: 'Hair Loss', accent: '#3E7FB0', alt: 'A man in his forties outdoors' },
-  hrt: { photo: PHOTOS.hrt, pos: '38% 30%', label: 'Hormone Therapy', accent: '#258F9F', alt: 'A woman in her forties at home with her eyes closed' },
-  'sexual-health': { photo: PHOTOS.sexual, pos: '50% 35%', label: 'Sexual Health', accent: '#3A5BA0', alt: 'A couple embracing' },
-  peptides: { photo: PHOTOS.peptides, pos: '55% 30%', label: 'Peptides & Wellness', accent: '#4E9A8A', alt: 'A woman stretching in a warm, sunlit studio' },
+const AREA: Record<CategorySlug, { photo: string | number; pos: string; label: string; goal: string; accent: string; alt: string }> = {
+  'weight-management': { photo: PHOTOS.weight, pos: '62% 30%', label: 'Weight Management', goal: 'Managing my weight', accent: '#2BA9B4', alt: 'A woman in her forties running by the sea' },
+  skincare: { photo: PHOTOS.skincare, pos: '50% 30%', label: 'Skincare', goal: 'Caring for my skin', accent: '#C2607E', alt: 'A woman in her forties smiling, touching the skin by her eye' },
+  'hair-loss': { photo: PHOTOS.hair, pos: '50% 25%', label: 'Hair Loss', goal: 'Thinning hair', accent: '#3E7FB0', alt: 'A man in his forties running a hand through his hair in the evening sun' },
+  hrt: { photo: PHOTOS.hrt, pos: '38% 30%', label: 'Hormone Therapy', goal: 'Hormone changes', accent: '#258F9F', alt: 'A woman in her forties at home with her eyes closed' },
+  'sexual-health': { photo: PHOTOS.sexual, pos: '50% 35%', label: 'Sexual Health', goal: 'Intimacy and sexual health', accent: '#3A5BA0', alt: 'A couple embracing' },
+  peptides: { photo: PHOTOS.peptides, pos: '55% 30%', label: 'Peptides & Wellness', goal: 'Overall wellness', accent: '#4E9A8A', alt: 'A woman stretching in a warm, sunlit studio' },
 };
 const ORDER: CategorySlug[] = ['weight-management', 'skincare', 'hair-loss', 'hrt', 'sexual-health', 'peptides'];
 
@@ -152,12 +152,13 @@ export function CareExplorer() {
             <Split as="h2" className="h-section" id="cx-title" lines={['Care for every', <>stage of <em>life</em></>]} />
           </div>
           <R as="p" className="cx__lede">
-            Whatever brings you here, your care starts with your health, your history and your goals.
-            Choose an area to see how it works.
+            Every visit starts with your health, your history and your goals. Tell us what brings you here,
+            and we'll show you how care works for it.
           </R>
         </div>
 
-        <R className="cx__tabs" role="tablist" aria-label="Treatment areas">
+        <R as="p" className="cx__ask" id="cx-ask">What brings you here today?</R>
+        <R className="cx__tabs" role="tablist" aria-labelledby="cx-ask">
           {ORDER.map((s) => (
             <button
               key={s}
@@ -169,7 +170,7 @@ export function CareExplorer() {
               onClick={() => setActive(s)}
             >
               {s === active && <motion.span className="cx__tab-bg" layoutId="cx-tab" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}
-              <span className="cx__tab-dot" />{AREA[s].label}
+              <span className="cx__tab-dot" />{AREA[s].goal}
             </button>
           ))}
         </R>

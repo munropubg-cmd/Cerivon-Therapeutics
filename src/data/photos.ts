@@ -16,7 +16,7 @@ export const PHOTOS = {
   hero: `${L}/hero.webp`,         // woman in her forties, face to the sun under a blue sky
   weight: `${L}/weight.webp`,     // woman, 40s, running by the sea
   skincare: `${L}/skincare.webp`, // woman, 40s, natural skin, smiling
-  hair: 11863796,                 // man, mid-40s, outdoors (Pexels)
+  hair: `${L}/hair.webp`,         // man, mid-40s, hand in his hair, face to the evening sun
   hrt: `${L}/hrt.webp`,           // woman, 40s, eyes closed at home
   sexual: `${L}/sexual.webp`,     // couple, embrace
   peptides: `${L}/peptides.webp`, // woman stretching, warm studio

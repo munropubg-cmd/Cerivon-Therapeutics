@@ -497,3 +497,32 @@
 
 /* mobile browsers: the visible screen height, so the hero never hides under the toolbar */
 @media (max-width: 960px) { .lh { height: 100svh; min-height: 600px; } }
+
+/* ==========================================================================
+   Revision 2 (client, late Oct 2026)
+   ========================================================================== */
+
+/* Molecular / DNA strand: straddles section boundaries as a branded transition */
+.helix { display: block; width: 100%; height: 100%; overflow: visible; }
+.helix-divider { position: relative; z-index: 3; height: 120px; margin: -60px 0; pointer-events: none; overflow: hidden; opacity: .55; }
+.helix-divider--dark { opacity: .7; }
+@media (max-width: 640px) { .helix-divider { height: 90px; margin: -45px 0; } }
+
+/* "What brings you here today?" inside the treatment section */
+.cx__ask { margin-bottom: 14px; font-family: var(--f-head); font-size: clamp(20px, 1.7vw, 24px); letter-spacing: -.02em; color: var(--navy); }
+
+/* Readability: darker supporting text everywhere, a touch larger where it was small */
+:root { --ink-70: rgba(11, 25, 48, .78); --ink-55: rgba(11, 25, 48, .66); }
+.role-note { font-size: 14.5px; color: var(--ink-70); }
+.cx__note { font-size: 14px; color: var(--ink-70); }
+.cx__lede, .ct__lede, .how__lede { font-size: 17.5px; }
+.lh__lede { color: rgba(255, 255, 255, .92); }
+.lh__product-top small, .lh__product-foot span { color: var(--ink-70); }
+.ct__chip small, .xp__ui small, .lh__card-head small { color: var(--ink-70); }
+.xp__tile--photo p, .xp__cap--light p { color: rgba(255, 255, 255, .9); }
+.lcta__lede { color: rgba(255, 255, 255, .88); }
+@media (max-width: 640px) {
+  .how__txt > span, .ct__list li > span > span, .xp__tile p, .cx__text { font-size: 15.5px; }
+  .cx__chips li { font-size: 14px; }
+  .role-note { font-size: 14px; }
+}

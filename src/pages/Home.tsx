@@ -1,3 +1,4 @@
+import { HelixDivider } from '../components/Helix';
 import { Hero } from '../sections/Hero';
 import { CareExplorer, CareTeam, Experience, HowItWorks, LifeCta, LifeHero } from '../sections/HomeSections';
 import { FaqSection } from '../sections/Sections';
@@ -17,9 +18,12 @@ export default function Home() {
     <>
       <LifeHero />
       <Hero />
+      <HelixDivider />
       <CareExplorer />
+      <HelixDivider />
       <HowItWorks />
       <CareTeam />
+      <HelixDivider />
       <Experience />
       <FaqSection />
       <LifeCta />
